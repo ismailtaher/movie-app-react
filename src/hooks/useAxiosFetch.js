@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useAxiosFetch = (dataUrl, isGenre) => {
+const useAxiosFetch = (dataUrl, isGenre, isDetails) => {
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +17,13 @@ const useAxiosFetch = (dataUrl, isGenre) => {
           cancelToken: source.token,
         });
         if (isMounted) {
-          setData(isGenre ? response.data.genres : response.data.results);
+          setData(
+            isGenre
+              ? response.data.genres
+              : isDetails
+              ? response.data
+              : response.data.results
+          );
           setFetchError(null);
         }
       } catch (err) {

@@ -5,12 +5,14 @@ import Details from "./Details";
 import About from "./About";
 import Missing from "./Missing";
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import useWindowSize from "./hooks/useWindowSize";
 import useAxiosFetch from "./hooks/useAxiosFetch";
 
 function App() {
   const api_key = "06f4f010260b5d81753323c62f046f17";
+
+  const navigate = useNavigate();
 
   const [genreSearch, setGenreSearch] = useState([
     {
@@ -131,6 +133,7 @@ function App() {
     );
     setGenreSearch(listGenres);
     toggleMenu();
+    navigate("/");
   };
 
   const [search, setSearch] = useState("");
@@ -195,7 +198,9 @@ function App() {
               isGenreLoading={isGenreLoading}
             />
           }></Route>
-        <Route path="/details/:id" element={<Details />}></Route>
+        <Route
+          path="/details/:id"
+          element={<Details api_key={api_key} />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="*" element={<Missing />}></Route>
       </Routes>

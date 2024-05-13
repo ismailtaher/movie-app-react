@@ -23,7 +23,7 @@ const Header = ({
   }; */
 
   return (
-    <header className="sticky p-2 bg-slate-700 -top-1 z-10 flex justify-center gap-1 items-between text-xl font-display flex-col w-[100%]">
+    <header className="p-2 bg-slate-700 -top-1 z-10 flex justify-center gap-1 items-between text-xl font-display flex-col w-[100%]">
       <div className="relative flex justify-between gap-1 items-center flex-row w-auto flex-grow">
         {width < 768 && (
           <>

@@ -9,7 +9,7 @@ const Home = ({
   genreError,
   isGenreLoading,
 }) => {
-  console.log(movies);
+  /* console.log(movies); */
   return (
     <main className="main-style p-3">
       <h2 className="text-2xl">Home</h2>
