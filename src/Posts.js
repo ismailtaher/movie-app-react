@@ -21,7 +21,7 @@ const Posts = ({ movie, genres }) => {
               className="hover:contrast-[60%] hover:blur-[1.5px] ease-in-out duration-500 rounded"
             />
           </div>
-          <div className="hover:bg-rose-600 absolute bottom-4 left-2">
+          <div className="absolute bottom-4 left-2">
             <h2 className="text-2xl">
               {movie.title}&nbsp;&#40;{movie.release_date.slice(0, 4)}&#41;
             </h2>

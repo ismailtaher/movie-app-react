@@ -7,6 +7,7 @@ const Details = ({ api_key }) => {
   const { id } = useParams();
 
   const [details, setDetails] = useState({});
+  const [credits, setCredits] = useState({});
 
   const {
     data: detailsData,
@@ -22,17 +23,39 @@ const Details = ({ api_key }) => {
     setDetails(detailsData);
   }, [detailsData]);
 
+  const {
+    data: creditsData,
+    fetchError: creditsError,
+    isLoading: isCreditsLoading,
+  } = useAxiosFetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?language=en&api_key=${api_key}`,
+    false,
+    false,
+    "isCredits"
+  );
+
+  useEffect(() => {
+    setCredits(creditsData);
+  }, [creditsData]);
+
   console.log(id);
   console.log(detailsData);
+  console.log(credits);
   return (
     <main className="main-style">
-      {isDetailsLoading && <p className="text-center">Loading Details...</p>}
-      {!isDetailsLoading && detailsError && (
-        <p className="text-rose-900 text-center">{detailsError}</p>
+      {isDetailsLoading && isCreditsLoading && (
+        <p className="text-center">Loading Details...</p>
       )}
-      {!isDetailsLoading && !detailsError && (
-        <MovieDetails details={details}></MovieDetails>
-      )}
+      {(!isDetailsLoading && !isCreditsLoading && detailsError) ||
+        (creditsError && (
+          <p className="text-rose-900 text-center">{detailsError}</p>
+        ))}
+      {!isDetailsLoading &&
+        !isCreditsLoading &&
+        !detailsError &&
+        !creditsError && (
+          <MovieDetails details={details} credits={credits}></MovieDetails>
+        )}
     </main>
   );
 };

@@ -9,6 +9,24 @@
     flex-grow: 3;
     overflow-y: auto;
   }
+
+  .cropped-image {
+    /* height: 100%;
+    width: 112px; */
+    clip-path: inset(0px 0px 34px 0px);
+    overflow: hidden;
+  }
+
+  .scroll-cast::-webkit-scrollbar {
+    background-color: rgb(15 23 42);
+    margin: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2rem;
+  }
 }
 
 @layer utilities {

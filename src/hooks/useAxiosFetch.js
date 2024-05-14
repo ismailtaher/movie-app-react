@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useAxiosFetch = (dataUrl, isGenre, isDetails) => {
+const useAxiosFetch = (dataUrl, isGenre, isDetails, isCredits) => {
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +21,8 @@ const useAxiosFetch = (dataUrl, isGenre, isDetails) => {
             isGenre
               ? response.data.genres
               : isDetails
+              ? response.data
+              : isCredits
               ? response.data
               : response.data.results
           );
