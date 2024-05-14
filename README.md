@@ -14,7 +14,7 @@ The Movie App is a web application that provides detailed information about movi
 
 ### Home Screen:
 
-![Screenshot 2024-05-15 at 2 22 02 AM](https://github.com/ismailtaher/movie-app-react/assets/57496063/1071bd8c-1de9-4b3f-ad8f-b6f99090ec9a)
+![Screenshot 2024-05-15 at 2 16 14 AM](https://github.com/ismailtaher/movie-app-react/assets/57496063/b32a5773-d0de-4c0b-a9c9-d0224ffc50df)
 
 ### Nav Bar:
 
