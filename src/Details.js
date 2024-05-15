@@ -3,11 +3,13 @@ import { useParams } from "react-router";
 import useAxiosFetch from "./hooks/useAxiosFetch";
 import MovieDetails from "./MovieDetails";
 
-const Details = ({ api_key }) => {
+const Details = ({ api_key, width }) => {
   const { id } = useParams();
 
   const [details, setDetails] = useState({});
   const [credits, setCredits] = useState({});
+  const [trailer, setTrailer] = useState({});
+  const [reviews, setReviews] = useState({});
 
   const {
     data: detailsData,
@@ -38,23 +40,69 @@ const Details = ({ api_key }) => {
     setCredits(creditsData);
   }, [creditsData]);
 
+  const {
+    data: trailerData,
+    fetchError: trailerError,
+    isLoading: isTrailerLoading,
+  } = useAxiosFetch(
+    `https://api.themoviedb.org/3/movie/${id}/videos?language=en&api_key=${api_key}`,
+    false,
+    false,
+    false,
+    "isTrailer"
+  );
+
+  useEffect(() => {
+    setTrailer(trailerData);
+  }, [trailerData]);
+
+  useEffect(() => {
+    setCredits(creditsData);
+  }, [creditsData]);
+
+  const {
+    data: reviewData,
+    fetchError: reviewError,
+    isLoading: isReviewLoading,
+  } = useAxiosFetch(
+    `https://api.themoviedb.org/3/movie/${id}/reviews?language=en&api_key=${api_key}`,
+    false,
+    false,
+    false,
+    false,
+    "isReviews"
+  );
+
+  useEffect(() => {
+    setReviews(reviewData);
+  }, [reviewData]);
+
   console.log(id);
   console.log(detailsData);
-  console.log(credits);
+  console.log(reviews);
+
   return (
     <main className="main-style">
-      {isDetailsLoading && isCreditsLoading && (
+      {isDetailsLoading && isCreditsLoading && isTrailerLoading && (
         <p className="text-center">Loading Details...</p>
       )}
-      {(!isDetailsLoading && !isCreditsLoading && detailsError) ||
-        (creditsError && (
+      {!isDetailsLoading &&
+        !isCreditsLoading &&
+        detailsError &&
+        trailerError && (
           <p className="text-rose-900 text-center">{detailsError}</p>
-        ))}
+        )}
       {!isDetailsLoading &&
         !isCreditsLoading &&
         !detailsError &&
+        !trailerError &&
         !creditsError && (
-          <MovieDetails details={details} credits={credits}></MovieDetails>
+          <MovieDetails
+            width={width}
+            details={details}
+            credits={credits}
+            trailer={trailer}
+            reviews={reviews}></MovieDetails>
         )}
     </main>
   );

@@ -12,7 +12,7 @@ const Posts = ({ movie, genres }) => {
 
   return (
     <article>
-      <Link to={`/details/${movie.id}`}>
+      <Link to={`/${movie.id}`}>
         <div className="relative">
           <div className="py-2 rounded">
             <img

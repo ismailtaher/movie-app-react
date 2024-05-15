@@ -199,8 +199,8 @@ function App() {
             />
           }></Route>
         <Route
-          path="/details/:id"
-          element={<Details api_key={api_key} />}></Route>
+          path="/:id"
+          element={<Details api_key={api_key} width={width} />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="*" element={<Missing />}></Route>
       </Routes>

@@ -13,7 +13,7 @@
   .cropped-image {
     /* height: 100%;
     width: 112px; */
-    clip-path: inset(0px 0px 34px 0px);
+    clip-path: circle(30%);
     overflow: hidden;
   }
 
