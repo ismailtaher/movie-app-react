@@ -1,6 +1,8 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
+import Popular from "./Popular";
+import TopRated from "./TopRated";
 import Details from "./Details";
 import About from "./About";
 import Missing from "./Missing";
@@ -140,7 +142,11 @@ function App() {
 
   const [movies, setMovies] = useState([]);
 
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+
   const [genres, setGenres] = useState([]);
+
+  const [searchResults, setSearchResults] = useState([]);
 
   const { width } = useWindowSize();
 
@@ -149,6 +155,10 @@ function App() {
       .map((genreSingle) => (genreSingle.cond === true ? genreSingle.id : ""))
       .filter(isPositive)}`
   );
+
+  useEffect(() => {
+    setMovies(data);
+  }, [data, genreSearch]);
 
   /* console.log(
     "id",
@@ -167,12 +177,59 @@ function App() {
   );
 
   useEffect(() => {
-    setMovies(data);
-  }, [data, genreSearch]);
-
-  useEffect(() => {
     setGenres(dataGenre);
   }, [dataGenre]);
+
+  const {
+    data: dataPopular,
+    fetchError: popularError,
+    isLoading: isPopularLoading,
+  } = useAxiosFetch(
+    `https://api.themoviedb.org/3/movie/popular?language=en&api_key=${api_key}`
+  );
+
+  useEffect(() => {
+    setMovies(dataPopular);
+  }, [dataPopular]);
+
+  const {
+    data: dataTopRated,
+    fetchError: topRatedError,
+    isLoading: isTopRatedLoading,
+  } = useAxiosFetch(
+    `https://api.themoviedb.org/3/movie/top_rated?language=en&api_key=${api_key}`,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    "isTopRated"
+  );
+
+  useEffect(() => {
+    setTopRatedMovies(dataTopRated);
+  }, [dataTopRated]);
+
+  const {
+    data: searchData,
+    fetchError: searchError,
+    isLoading: isSearchLoading,
+  } = useAxiosFetch(
+    `https://api.themoviedb.org/3/search/movie?query=${search}&language=en&api_key=${api_key}`,
+    false,
+    false,
+    false,
+    false,
+    false,
+    search
+  );
+
+  useEffect(() => {
+    setSearchResults(searchData);
+  }, [search]);
+
+  /* console.log(searchResults); */
 
   return (
     <div className="bg-slate-900 text-white min-h-screen flex flex-col">
@@ -183,7 +240,10 @@ function App() {
         setGenreSearch={setGenreSearch}
         handleCheck={handleCheck}
         toggleMenu={toggleMenu}
-        width={width}></Header>
+        width={width}
+        searchResults={searchResults}
+        searchError={searchError}
+        isSearchLoading={isSearchLoading}></Header>
       <Routes>
         <Route
           exact
@@ -199,7 +259,32 @@ function App() {
             />
           }></Route>
         <Route
-          path="/:id"
+          path="/popular"
+          element={
+            <Popular
+              movies={movies}
+              popularError={popularError}
+              isPopularLoading={isPopularLoading}
+              genres={genres}
+              genreError={genreError}
+              isGenreLoading={isGenreLoading}
+            />
+          }></Route>
+        <Route
+          path="/top-rated"
+          element={
+            <TopRated
+              topRatedMovies={topRatedMovies}
+              topRatedError={topRatedError}
+              isTopRatedLoading={isTopRatedLoading}
+              genres={genres}
+              genreError={genreError}
+              isGenreLoading={isGenreLoading}
+            />
+          }></Route>
+        <Route
+          exact
+          path="movie/:id"
           element={<Details api_key={api_key} width={width} />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="*" element={<Missing />}></Route>

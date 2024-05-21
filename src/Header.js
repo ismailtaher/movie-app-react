@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import logo from "./images/duck-logo-white.png";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegUserCircle, FaTimes } from "react-icons/fa";
+import Results from "./Results";
 
 const Header = ({
   search,
@@ -12,15 +13,51 @@ const Header = ({
   setGenreSearch,
   handleCheck,
   toggleMenu,
+  searchResults,
+  searchError,
+  isSearchLoading,
 }) => {
-  /* const hamButton = document.getElementById("hamburger-button");
-  const mobileMenu = document.getElementById("nav-menu");
+  const [showResults, setShowResults] = useState(false);
+  const [showClearButton, setShowClearButton] = useState(false);
+  const searchRef = useRef(null);
+  const resultsRef = useRef(null);
+  /* const container = useRef(null);
+  const [height, setHeight] = useState(null);
+  useLayoutEffect(() => setHeight(container.current.offsetHeight), []);
+  console.log(height); */
 
-  const toggleMenu = () => {
-    mobileMenu.classList.toggle("hidden");
-    mobileMenu.classList.toggle("flex");
-    hamButton.classList.toggle("toggle-btn");
-  }; */
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchRef.current &&
+        resultsRef.current &&
+        !searchRef.current.contains(event.target) &&
+        !resultsRef.current.contains(event.target)
+      ) {
+        setShowResults(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleSearchChange = (e) => {
+    const searchText = e.target.value;
+    setSearch(e.target.value);
+    setShowResults(e.target.value !== "");
+
+    setShowClearButton(searchText !== "");
+  };
+
+  const handleClearSearch = () => {
+    setSearch("");
+    setShowResults(false);
+    setShowClearButton(false);
+  };
 
   return (
     <header className="p-2 bg-slate-700 -top-1 z-10 flex justify-center gap-1 items-between text-xl font-display flex-col w-[100%]">
@@ -74,15 +111,34 @@ const Header = ({
           <label className="absolute left-[-99999px]" htmlFor="search">
             Search Movies
           </label>
-          <input
-            className="text-xl bg-slate-800 w-[100%]"
-            type="text"
-            id="search"
-            placeholder=" Search Movies"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <div className="relative w-full">
+            <input
+              className="text-xl bg-slate-800 w-[100%] px-2 rounded"
+              type="text"
+              id="search"
+              autoComplete="off"
+              placeholder=" Search Movies"
+              /* ref={container} */
+              value={search}
+              onChange={handleSearchChange}
+            />
+            {showClearButton && (
+              <button
+                className={`absolute right-1 -top-[6px] transform translate-y-1/2`}
+                onClick={handleClearSearch}>
+                <FaTimes className="text-gray-400 hover:text-gray-600 cursor-pointer"></FaTimes>
+              </button>
+            )}
+          </div>
         </form>
+        {showResults && (
+          <Results
+            searchResults={searchResults}
+            searchError={searchError}
+            isSearchLoading={isSearchLoading}
+            resultsRef={resultsRef}
+            setShowResults={setShowResults}></Results>
+        )}
       </div>
     </header>
   );

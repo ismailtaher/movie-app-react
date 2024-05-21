@@ -77,26 +77,30 @@ const Details = ({ api_key, width }) => {
     setReviews(reviewData);
   }, [reviewData]);
 
-  console.log(id);
+  /* console.log(id);
   console.log(detailsData);
-  console.log(reviews);
+  console.log(reviews); */
 
   return (
     <main className="main-style">
-      {isDetailsLoading && isCreditsLoading && isTrailerLoading && (
-        <p className="text-center">Loading Details...</p>
-      )}
+      {isDetailsLoading &&
+        isCreditsLoading &&
+        isTrailerLoading &&
+        isReviewLoading && <p className="text-center">Loading Details...</p>}
       {!isDetailsLoading &&
         !isCreditsLoading &&
         detailsError &&
-        trailerError && (
+        trailerError &&
+        reviewError && (
           <p className="text-rose-900 text-center">{detailsError}</p>
         )}
       {!isDetailsLoading &&
         !isCreditsLoading &&
+        !isReviewLoading &&
         !detailsError &&
         !trailerError &&
-        !creditsError && (
+        !creditsError &&
+        !reviewError && (
           <MovieDetails
             width={width}
             details={details}

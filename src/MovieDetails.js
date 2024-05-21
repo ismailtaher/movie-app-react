@@ -131,7 +131,7 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
                       <img
                         className="object-scale-down rounded-md"
                         src={imgUrl + member.profile_path}
-                        alt={`${member.name}'s profile image`}
+                        alt={`${member.name}'s profile`}
                       />
                     )}
                   </div>
@@ -178,7 +178,7 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
                       className="cropped-image rounded-full"
                       width={width / 4}
                       src={imgUrl + reviews[0]?.author_details.avatar_path}
-                      alt={`${reviews[0]?.author}'s Profile Picture`}
+                      alt={`${reviews[0]?.author}'s Profile`}
                     />
                   </div>
                 )}

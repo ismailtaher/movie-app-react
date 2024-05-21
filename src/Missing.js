@@ -2,8 +2,8 @@ import React from "react";
 
 const Missing = () => {
   return (
-    <main>
-      <h2>Missing</h2>
+    <main className="main-style flex justify-center items-center">
+      <h2 className="text-2xl">Missing</h2>
     </main>
   );
 };
