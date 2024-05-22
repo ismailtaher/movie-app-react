@@ -5,7 +5,7 @@ const Results = forwardRef(
   ({ searchResults, searchError, isSearchLoading, setShowResults }, ref) => {
     return (
       <div
-        className="absolute top-[77px] bg-white w-full z-10 text-black"
+        className="absolute top-[77px] backdrop-blur-2xl w-full z-10 text-white rounded"
         ref={ref}>
         {isSearchLoading && <h2>Loading Search</h2>}
         {!isSearchLoading && searchError && (

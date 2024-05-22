@@ -23,7 +23,7 @@ const Home = ({
         !isGenreLoading &&
         !genreError &&
         !fetchError &&
-        (movies.length !== 0 ? (
+        (movies?.length !== 0 ? (
           <Feed movies={movies} genres={genres} />
         ) : (
           <p className="text-rose-900 text-center">No movies to display</p>

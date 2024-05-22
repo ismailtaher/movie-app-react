@@ -5,6 +5,10 @@ import Iframe from "react-iframe";
 const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
   const imgUrl = "https://image.tmdb.org/t/p/w500";
 
+  const backdrop = imgUrl + details.backdrop_path;
+
+  console.log(backdrop);
+
   const trailer_url = "https://youtube.com/embed/";
 
   const formatYear = (year) => {
@@ -51,18 +55,21 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
   console.log(width);
 
   return (
-    <div className="relative flex flex-col justify-center">
-      <div>
-        <img
-          src={imgUrl + details.backdrop_path}
-          alt={details.title + "Backdrop Image"}
-        />
-      </div>
-      <div className={`absolute w-24 top-0 mx-3 my-4`}>
-        <img
-          src={imgUrl + details.poster_path}
-          alt={details.title + "Poster Image"}
-        />
+    <div className={`relative flex flex-col justify-center w-full`}>
+      <div
+        style={{
+          backgroundImage: `url('${backdrop}')`,
+          backgroundSize: "cover",
+          display: "flex",
+          justifyContent: "start",
+          alignItems: "center",
+        }}>
+        <div className={`w-24 m-4`}>
+          <img
+            src={imgUrl + details.poster_path}
+            alt={details.title + "Poster Image"}
+          />
+        </div>
       </div>
       <section className="bg-slate-700 w-auto flex flex-col justify-center items-center py-2">
         <div>
@@ -135,7 +142,7 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
                       />
                     )}
                   </div>
-                  <div className="bg-slate-700 p-1  flex flex-col z-10 justify-start items-start">
+                  <div className="bg-slate-700 p-1  flex flex-col justify-start items-start">
                     <h2 className="font-semibold text-sm">{member.name}</h2>
                     <h2 className="text-zinc-300 text-sm">
                       {member.character}

@@ -9,7 +9,9 @@ const useAxiosFetch = (
   isTrailer,
   isReviews,
   isSearch,
-  isTopRated
+  isTopRated,
+  isPopular,
+  isUpcoming
 ) => {
   const [data, setData] = useState([]);
   const [fetchError, setFetchError] = useState(null);
@@ -40,7 +42,11 @@ const useAxiosFetch = (
               : isSearch
               ? response.data.results
               : isTopRated
-              ? response.data.results
+              ? response.data
+              : isPopular
+              ? response.data
+              : isUpcoming
+              ? response.data
               : response.data.results
           );
           setFetchError(null);

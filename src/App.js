@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import useWindowSize from "./hooks/useWindowSize";
 import useAxiosFetch from "./hooks/useAxiosFetch";
+import Upcoming from "./Upcoming";
 
 function App() {
   const api_key = "06f4f010260b5d81753323c62f046f17";
@@ -144,6 +145,8 @@ function App() {
 
   const [topRatedMovies, setTopRatedMovies] = useState([]);
 
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+
   const [genres, setGenres] = useState([]);
 
   const [searchResults, setSearchResults] = useState([]);
@@ -185,11 +188,19 @@ function App() {
     fetchError: popularError,
     isLoading: isPopularLoading,
   } = useAxiosFetch(
-    `https://api.themoviedb.org/3/movie/popular?language=en&api_key=${api_key}`
+    `https://api.themoviedb.org/3/movie/popular?language=en&api_key=${api_key}`,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    "isPopular"
   );
 
   useEffect(() => {
-    setMovies(dataPopular);
+    setMovies(dataPopular.results);
   }, [dataPopular]);
 
   const {
@@ -208,8 +219,33 @@ function App() {
   );
 
   useEffect(() => {
-    setTopRatedMovies(dataTopRated);
+    setTopRatedMovies(dataTopRated.results);
   }, [dataTopRated]);
+
+  console.log(dataTopRated);
+
+  const {
+    data: dataUpcoming,
+    fetchError: upcomingError,
+    isLoading: isUpcomingLoading,
+  } = useAxiosFetch(
+    `https://api.themoviedb.org/3/movie/upcoming?language=en&api_key=${api_key}`,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    "isUpcoming"
+  );
+
+  useEffect(() => {
+    setUpcomingMovies(dataUpcoming.results);
+  }, [dataUpcoming]);
+
+  console.log(dataTopRated);
 
   const {
     data: searchData,
@@ -277,6 +313,18 @@ function App() {
               topRatedMovies={topRatedMovies}
               topRatedError={topRatedError}
               isTopRatedLoading={isTopRatedLoading}
+              genres={genres}
+              genreError={genreError}
+              isGenreLoading={isGenreLoading}
+            />
+          }></Route>
+        <Route
+          path="/upcoming"
+          element={
+            <Upcoming
+              upcomingMovies={upcomingMovies}
+              upcomingError={upcomingError}
+              isUpcomingLoading={isUpcomingLoading}
               genres={genres}
               genreError={genreError}
               isGenreLoading={isGenreLoading}

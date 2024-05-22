@@ -11,7 +11,7 @@ const TopRated = ({
 }) => {
   return (
     <main className="main-style p-3">
-      <h2 className="text-2xl">Top Rated</h2>
+      <h2 className="text-2xl">Top Rated Movies</h2>
       {isTopRatedLoading && isGenreLoading && (
         <p className="text-center">Loading Movies...</p>
       )}
@@ -22,7 +22,7 @@ const TopRated = ({
         !isGenreLoading &&
         !genreError &&
         !topRatedError &&
-        (topRatedMovies.length !== 0 ? (
+        (topRatedMovies?.length !== 0 ? (
           <Feed movies={topRatedMovies} genres={genres} />
         ) : (
           <p className="text-rose-900 text-center">No movies to display</p>
