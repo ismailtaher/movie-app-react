@@ -1,5 +1,6 @@
 import React from "react";
 import Feed from "./Feed";
+import Pages from "./Pages";
 
 const TopRated = ({
   topRatedMovies,
@@ -8,6 +9,9 @@ const TopRated = ({
   genres,
   isGenreLoading,
   genreError,
+  currentPage,
+  totalPages,
+  handlePageChange,
 }) => {
   return (
     <main className="main-style p-3">
@@ -23,7 +27,13 @@ const TopRated = ({
         !genreError &&
         !topRatedError &&
         (topRatedMovies?.length !== 0 ? (
-          <Feed movies={topRatedMovies} genres={genres} />
+          <>
+            <Feed movies={topRatedMovies} genres={genres} />
+            <Pages
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}></Pages>
+          </>
         ) : (
           <p className="text-rose-900 text-center">No movies to display</p>
         ))}

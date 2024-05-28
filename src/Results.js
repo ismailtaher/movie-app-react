@@ -2,10 +2,13 @@ import React, { forwardRef } from "react";
 import SearchPost from "./SearchPost";
 
 const Results = forwardRef(
-  ({ searchResults, searchError, isSearchLoading, setShowResults }, ref) => {
+  (
+    { searchResults, searchError, isSearchLoading, setShowResults, genres },
+    ref
+  ) => {
     return (
       <div
-        className="absolute top-[77px] backdrop-blur-2xl w-full z-10 text-white rounded"
+        className="absolute top-[77px] md:top-[47px] md:left-0 backdrop-blur-2xl w-full z-10 text-white rounded md:py-2"
         ref={ref}>
         {isSearchLoading && <h2>Loading Search</h2>}
         {!isSearchLoading && searchError && (
@@ -18,6 +21,7 @@ const Results = forwardRef(
                 key={result.id}
                 result={result}
                 setShowResults={setShowResults}
+                genres={genres}
               />
             ))}
           </ul>

@@ -7,7 +7,7 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
 
   const backdrop = imgUrl + details.backdrop_path;
 
-  console.log(backdrop);
+  /* console.log(backdrop); */
 
   const trailer_url = "https://youtube.com/embed/";
 
@@ -52,7 +52,7 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
       ? credits.crew.find((member) => member.job === "Director")
       : null; */
 
-  console.log(width);
+  /* console.log(width); */
 
   return (
     <div className={`relative flex flex-col justify-center w-full`}>

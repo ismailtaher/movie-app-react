@@ -153,6 +153,10 @@ function App() {
 
   const { width } = useWindowSize();
 
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [totalPages, setTotalPages] = useState(1);
+
   const { data, fetchError, isLoading } = useAxiosFetch(
     `https://api.themoviedb.org/3/discover/movie?language=en-US&api_key=${api_key}&with_genres=${genreSearch
       .map((genreSingle) => (genreSingle.cond === true ? genreSingle.id : ""))
@@ -208,7 +212,7 @@ function App() {
     fetchError: topRatedError,
     isLoading: isTopRatedLoading,
   } = useAxiosFetch(
-    `https://api.themoviedb.org/3/movie/top_rated?language=en&api_key=${api_key}`,
+    `https://api.themoviedb.org/3/movie/top_rated?language=en&page=${currentPage}&api_key=${api_key}`,
     false,
     false,
     false,
@@ -220,16 +224,21 @@ function App() {
 
   useEffect(() => {
     setTopRatedMovies(dataTopRated.results);
-  }, [dataTopRated]);
+    setTotalPages(dataTopRated.total_pages);
+  }, [dataTopRated, currentPage]);
 
-  console.log(dataTopRated);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  /* console.log(dataTopRated); */
 
   const {
     data: dataUpcoming,
     fetchError: upcomingError,
     isLoading: isUpcomingLoading,
   } = useAxiosFetch(
-    `https://api.themoviedb.org/3/movie/upcoming?language=en&api_key=${api_key}`,
+    `https://api.themoviedb.org/3/movie/upcoming?language=en&page=${currentPage}&api_key=${api_key}`,
     false,
     false,
     false,
@@ -245,7 +254,7 @@ function App() {
     setUpcomingMovies(dataUpcoming.results);
   }, [dataUpcoming]);
 
-  console.log(dataTopRated);
+  /* console.log(dataTopRated); */
 
   const {
     data: searchData,
@@ -263,9 +272,9 @@ function App() {
 
   useEffect(() => {
     setSearchResults(searchData);
-  }, [search]);
+  }, [searchData, search]);
 
-  /* console.log(searchResults); */
+  console.log(searchResults);
 
   return (
     <div className="bg-slate-900 text-white min-h-screen flex flex-col">
@@ -279,7 +288,9 @@ function App() {
         width={width}
         searchResults={searchResults}
         searchError={searchError}
-        isSearchLoading={isSearchLoading}></Header>
+        isSearchLoading={isSearchLoading}
+        setCurrentPage={setCurrentPage}
+        genres={genres}></Header>
       <Routes>
         <Route
           exact
@@ -304,6 +315,9 @@ function App() {
               genres={genres}
               genreError={genreError}
               isGenreLoading={isGenreLoading}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              handlePageChange={handlePageChange}
             />
           }></Route>
         <Route
@@ -316,6 +330,9 @@ function App() {
               genres={genres}
               genreError={genreError}
               isGenreLoading={isGenreLoading}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              handlePageChange={handlePageChange}
             />
           }></Route>
         <Route
@@ -328,6 +345,9 @@ function App() {
               genres={genres}
               genreError={genreError}
               isGenreLoading={isGenreLoading}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              handlePageChange={handlePageChange}
             />
           }></Route>
         <Route
