@@ -12,6 +12,7 @@ const TopRated = ({
   currentPage,
   totalPages,
   handlePageChange,
+  width,
 }) => {
   return (
     <main className="main-style p-3">
@@ -32,7 +33,8 @@ const TopRated = ({
             <Pages
               currentPage={currentPage}
               totalPages={totalPages}
-              onPageChange={handlePageChange}></Pages>
+              onPageChange={handlePageChange}
+              width={width}></Pages>
           </>
         ) : (
           <p className="text-rose-900 text-center">No movies to display</p>

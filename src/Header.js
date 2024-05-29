@@ -211,7 +211,7 @@ const Header = ({
             <h1 className="text-white md:text-3xl md:text-black">MDB</h1>
           </div>
         </Link>
-        {640 < width && width < 1024 && (
+        {640 < width && width < 1025 && (
           <>
             <div className="flex flex-grow justify-center items-center">
               <form className="w-[100%]" onSubmit={(e) => e.preventDefault()}>

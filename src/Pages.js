@@ -1,8 +1,11 @@
 import React from "react";
 
-const Pages = ({ currentPage, totalPages, onPageChange }) => {
+const Pages = ({ currentPage, totalPages, onPageChange, width }) => {
   const pages = [...Array(totalPages).keys()].map((n) => n + 1);
-  const maxVisibleButtons = 5;
+  let maxVisibleButtons = 5;
+  if (width > 640) {
+    maxVisibleButtons = 10;
+  }
 
   const getVisiblePages = () => {
     const start = Math.max(0, currentPage - Math.ceil(maxVisibleButtons / 2));

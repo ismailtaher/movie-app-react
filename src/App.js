@@ -274,7 +274,7 @@ function App() {
     setSearchResults(searchData);
   }, [searchData, search]);
 
-  console.log(searchResults);
+  /* console.log(searchResults); */
 
   return (
     <div className="bg-slate-900 text-white min-h-screen flex flex-col">
@@ -318,6 +318,7 @@ function App() {
               currentPage={currentPage}
               totalPages={totalPages}
               handlePageChange={handlePageChange}
+              width={width}
             />
           }></Route>
         <Route
@@ -333,6 +334,7 @@ function App() {
               currentPage={currentPage}
               totalPages={totalPages}
               handlePageChange={handlePageChange}
+              width={width}
             />
           }></Route>
         <Route
@@ -348,6 +350,7 @@ function App() {
               currentPage={currentPage}
               totalPages={totalPages}
               handlePageChange={handlePageChange}
+              width={width}
             />
           }></Route>
         <Route
