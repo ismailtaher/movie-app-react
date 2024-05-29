@@ -12,7 +12,7 @@ const Home = ({
   /* console.log(movies); */
   return (
     <main className="main-style p-3">
-      <h2 className="text-2xl md:text-3xl">Home</h2>
+      <h2 className="text-2xl md:text-3xl text-black">Home</h2>
       {isLoading && isGenreLoading && (
         <p className="text-center">Loading Movies...</p>
       )}

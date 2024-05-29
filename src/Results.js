@@ -8,7 +8,7 @@ const Results = forwardRef(
   ) => {
     return (
       <div
-        className="absolute top-[77px] md:top-[47px] md:left-0 backdrop-blur-2xl w-full z-10 text-white rounded md:py-2"
+        className="absolute top-[77px] md:top-[47px] md:left-0 bg-[#C6DABF] w-full z-10 text-black rounded py-2 md:py-2"
         ref={ref}>
         {isSearchLoading && <h2>Loading Search</h2>}
         {!isSearchLoading && searchError && (

@@ -29,7 +29,7 @@ const Pages = ({ currentPage, totalPages, onPageChange, width }) => {
           className={`px-2 h-7 border rounded-full ${
             page === currentPage
               ? "bg-emerald-500 text-white"
-              : "bg-white text-black border-emerald-500"
+              : "bg-white text-black border-black"
           }hover:bg-emerald-400 hover-text-white transition-colors duration-300`}>
           {page}
         </button>

@@ -14,7 +14,7 @@ const Posts = ({ movie, genres }) => {
   return (
     <article className="flex flex-wrap md:w-[100%]">
       <Link to={`/movie/${movie.id}`} className="flex flex-wrap">
-        <div className="bg-slate-700 p-2 my-3 rounded">
+        <div className="bg-[#C6DABF] p-2 my-3 rounded">
           <div className="rounded md:w-auto relative">
             <img
               src={imgUrl + movie.poster_path}
@@ -27,12 +27,12 @@ const Posts = ({ movie, genres }) => {
           </div>
           <div className="p-1 text-wrap">
             <div className="flex justify-between py-2 relative flex-wrap">
-              <h2 className="text-2xl flex-wrap text-wrap">
+              <h2 className="text-black text-2xl flex-wrap text-wrap">
                 {movie.title}&nbsp;&#40;{movie.release_date.slice(0, 4)}&#41;
               </h2>
             </div>
             {movie.adult && <h3>18+</h3>}
-            <h3 className="text-xl text-slate-300 text-wrap">{commonGenres}</h3>
+            <h3 className="text-xl text-slate-700 text-wrap">{commonGenres}</h3>
           </div>
         </div>
       </Link>
