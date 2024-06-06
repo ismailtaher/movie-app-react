@@ -136,7 +136,7 @@ function App() {
     );
     setGenreSearch(listGenres);
     toggleMenu();
-    navigate("/");
+    navigate("/popular");
   };
 
   const [search, setSearch] = useState("");
@@ -277,7 +277,7 @@ function App() {
   /* console.log(searchResults); */
 
   return (
-    <div className="bg-white text-white min-h-screen flex flex-col">
+    <div className="bg-[#F9F6EE] text-black min-h-screen flex flex-col">
       <Header
         search={search}
         setSearch={setSearch}
@@ -300,9 +300,16 @@ function App() {
               movies={movies}
               fetchError={fetchError}
               isLoading={isLoading}
+              topRatedMovies={topRatedMovies}
+              topRatedError={topRatedError}
+              isTopRatedLoading={isTopRatedLoading}
+              upcomingMovies={upcomingMovies}
+              upcomingError={upcomingError}
+              isUpcomingLoading={isUpcomingLoading}
               genres={genres}
               genreError={genreError}
               isGenreLoading={isGenreLoading}
+              width={width}
             />
           }></Route>
         <Route

@@ -170,6 +170,7 @@ const Header = ({
       },
     ]);
     handleClearSearch();
+    setCurrentPage(1);
   };
 
   return (

@@ -55,7 +55,7 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
   /* console.log(width); */
 
   return (
-    <div className={`relative flex flex-col justify-center w-full`}>
+    <div className={`relative flex flex-col justify-center w-full text-white`}>
       <div
         className=""
         style={{
