@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import movieReel from "./images/MovieReel.jpeg";
 
 const SearchPost = ({ result, setShowResults, genres }) => {
   const handleCLick = () => {
@@ -22,7 +23,7 @@ const SearchPost = ({ result, setShowResults, genres }) => {
         className="flex justify-start items-center space-x-4">
         <div>
           <img
-            src={imgUrl + result.poster_path}
+            src={result.poster_path ? imgUrl + result.poster_path : movieReel}
             alt="Movie poster"
             className="w-12 md:w-16"
           />

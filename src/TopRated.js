@@ -10,7 +10,7 @@ const TopRated = ({
   isGenreLoading,
   genreError,
   currentPage,
-  totalPages,
+  topRatedTotalPages,
   handlePageChange,
   width,
 }) => {
@@ -32,7 +32,7 @@ const TopRated = ({
             <Feed movies={topRatedMovies} genres={genres} />
             <Pages
               currentPage={currentPage}
-              totalPages={totalPages}
+              totalPages={topRatedTotalPages}
               onPageChange={handlePageChange}
               width={width}></Pages>
           </>

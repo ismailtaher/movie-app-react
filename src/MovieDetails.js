@@ -1,6 +1,7 @@
 import React from "react";
 import ISO6391 from "iso-639-1";
 import Iframe from "react-iframe";
+import movieReel from "./images/MovieReel.jpeg";
 
 const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
   const imgUrl = "https://image.tmdb.org/t/p/w500";
@@ -78,7 +79,9 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
             <div className={`w-24 m-4 md:w-full`}>
               <img
                 className="w-full"
-                src={imgUrl + details.poster_path}
+                src={
+                  details.poster_path ? imgUrl + details.poster_path : movieReel
+                }
                 alt={details.title + "Poster Image"}
               />
             </div>

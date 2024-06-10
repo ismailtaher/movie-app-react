@@ -24,7 +24,6 @@ const HomeFeed = ({ movies, genres, width }) => {
     }
   };
 
-  console.log(movies);
   return (
     <div className="relative">
       {width > 640 && (

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import movieReel from "./images/MovieReel.jpeg";
 
 const Posts = ({ movie, genres }) => {
   const imgUrl = "https://image.tmdb.org/t/p/w500";
@@ -11,12 +12,12 @@ const Posts = ({ movie, genres }) => {
     .join(" | ");
 
   return (
-    <article className="flex flex-wrap md:w-[100%]">
+    <article className="flex flex-wrap md:w-[100%] border-box">
       <Link to={`/movie/${movie.id}`} className="flex flex-wrap">
         <div className=" border drop-shadow border-[#C6DABF] hover:bg-[#C6DABF] p-2 my-3 rounded">
           <div className="rounded md:w-auto relative">
             <img
-              src={imgUrl + movie.poster_path}
+              src={movie.poster_path ? imgUrl + movie.poster_path : movieReel}
               alt={`${movie.title} Poster`}
               className="ease-in-out duration-500 rounded w-full"
             />

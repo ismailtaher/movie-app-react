@@ -4,9 +4,9 @@ import HomeBg from "./images/wallBG.jpeg";
 import { Link } from "react-router-dom";
 
 const Home = ({
-  movies,
-  fetchError,
-  isLoading,
+  popularMovies,
+  popularError,
+  isPopularLoading,
   topRatedMovies,
   topRatedError,
   isTopRatedLoading,
@@ -40,26 +40,28 @@ const Home = ({
         </article>
       </section>
       {/* <h2 className="p-3 pb-0 text-2xl md:text-3xl text-black">Home</h2> */}
-      {isLoading &&
+      {isPopularLoading &&
         isTopRatedLoading &&
         isUpcomingLoading &&
         isGenreLoading && <p className="text-center">Loading Movies...</p>}
-      {!isLoading &&
+      {!isPopularLoading &&
         !isTopRatedLoading &&
         !isUpcomingLoading &&
         !isGenreLoading &&
         topRatedError &&
         upcomingError &&
-        fetchError && <p className="text-rose-900 text-center">{fetchError}</p>}
-      {!isLoading &&
+        popularError && (
+          <p className="text-rose-900 text-center">{popularError}</p>
+        )}
+      {!isPopularLoading &&
         !isTopRatedLoading &&
         !isUpcomingLoading &&
         !isGenreLoading &&
         !genreError &&
         !topRatedError &&
         !upcomingError &&
-        !fetchError &&
-        (movies?.length !== 0 ? (
+        !popularError &&
+        (popularMovies?.length !== 0 && topRatedMovies?.length !== 0 ? (
           <section className="">
             <article className="my-6">
               <Link to="/popular" className="inline-block pl-3 pb-2">
@@ -67,7 +69,7 @@ const Home = ({
                   Popular Movies &#8250;
                 </h2>
               </Link>
-              <HomeFeed width={width} movies={movies} genres={genres} />
+              <HomeFeed width={width} movies={popularMovies} genres={genres} />
             </article>
             <article className="my-6">
               <Link to="/top-rated" className="inline-block pl-2 pb-2">

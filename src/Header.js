@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import logo from "./images/duck-logo-white.png";
+/* import logo from "./images/duck-logo-white.png"; */
 import blackLogo from "./images/duck-logo.png";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";

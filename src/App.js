@@ -1,13 +1,14 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
+import Discover from "./Discover";
 import Popular from "./Popular";
 import TopRated from "./TopRated";
 import Details from "./Details";
 import About from "./About";
 import Missing from "./Missing";
 import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import useWindowSize from "./hooks/useWindowSize";
 import useAxiosFetch from "./hooks/useAxiosFetch";
 import Upcoming from "./Upcoming";
@@ -135,13 +136,19 @@ function App() {
         : genreSingle
     );
     setGenreSearch(listGenres);
+    const selectedGenres = listGenres
+      .filter((genre) => genre.cond)
+      .map((genre) => genre.name)
+      .join("+");
     toggleMenu();
-    navigate("/popular");
+    navigate(`/discover/${selectedGenres}`);
   };
 
   const [search, setSearch] = useState("");
 
   const [movies, setMovies] = useState([]);
+
+  const [popularMovies, setPopularMovies] = useState([]);
 
   const [topRatedMovies, setTopRatedMovies] = useState([]);
 
@@ -156,15 +163,27 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [totalPages, setTotalPages] = useState(1);
+  const [topRatedTotalPages, setTopRatedTotalPages] = useState(1);
+  const [popularTotalPages, setPopularTotalPages] = useState(1);
+  const [upcomingTotalPages, setUpcomingTotalPages] = useState(1);
+
+  const getSelectedGenres = (genreSearch) => {
+    return genreSearch
+      .map((genreSingle) => (genreSingle.cond === true ? genreSingle.id : ""))
+      .filter(isPositive);
+  };
+
+  const { selectedGenres } = useParams();
+
+  const genresString = selectedGenres || getSelectedGenres(genreSearch);
 
   const { data, fetchError, isLoading } = useAxiosFetch(
-    `https://api.themoviedb.org/3/discover/movie?language=en-US&api_key=${api_key}&with_genres=${genreSearch
-      .map((genreSingle) => (genreSingle.cond === true ? genreSingle.id : ""))
-      .filter(isPositive)}`
+    `https://api.themoviedb.org/3/discover/movie?language=en-US&api_key=${api_key}&with_genres=${genresString}&page=${currentPage}`
   );
 
   useEffect(() => {
     setMovies(data);
+    setTotalPages(data.total_pages);
   }, [data, genreSearch]);
 
   /* console.log(
@@ -192,7 +211,7 @@ function App() {
     fetchError: popularError,
     isLoading: isPopularLoading,
   } = useAxiosFetch(
-    `https://api.themoviedb.org/3/movie/popular?language=en&api_key=${api_key}`,
+    `https://api.themoviedb.org/3/movie/popular?language=en&page=${currentPage}&api_key=${api_key}`,
     false,
     false,
     false,
@@ -204,7 +223,8 @@ function App() {
   );
 
   useEffect(() => {
-    setMovies(dataPopular.results);
+    setPopularMovies(dataPopular.results);
+    setPopularTotalPages(dataPopular.total_pages);
   }, [dataPopular]);
 
   const {
@@ -224,7 +244,7 @@ function App() {
 
   useEffect(() => {
     setTopRatedMovies(dataTopRated.results);
-    setTotalPages(dataTopRated.total_pages);
+    setTopRatedTotalPages(dataTopRated.total_pages);
   }, [dataTopRated, currentPage]);
 
   const handlePageChange = (page) => {
@@ -251,7 +271,10 @@ function App() {
   );
 
   useEffect(() => {
-    setUpcomingMovies(dataUpcoming.results);
+    if (dataUpcoming && dataUpcoming.results) {
+      setUpcomingMovies(dataUpcoming.results);
+      setUpcomingTotalPages(dataUpcoming.total_pages || 1);
+    }
   }, [dataUpcoming]);
 
   /* console.log(dataTopRated); */
@@ -297,9 +320,9 @@ function App() {
           path="/"
           element={
             <Home
-              movies={movies}
-              fetchError={fetchError}
-              isLoading={isLoading}
+              popularMovies={popularMovies}
+              popularError={popularError}
+              isPopularLoading={isPopularLoading}
               topRatedMovies={topRatedMovies}
               topRatedError={topRatedError}
               isTopRatedLoading={isTopRatedLoading}
@@ -313,17 +336,33 @@ function App() {
             />
           }></Route>
         <Route
+          path="/discover/:selectedGenres"
+          element={
+            <Discover
+              movies={movies}
+              fetchError={fetchError}
+              isLoading={isLoading}
+              genres={genres}
+              genreError={genreError}
+              isGenreLoading={isGenreLoading}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              handlePageChange={handlePageChange}
+              width={width}
+            />
+          }></Route>
+        <Route
           path="/popular"
           element={
             <Popular
-              movies={movies}
+              popularMovies={popularMovies}
               popularError={popularError}
               isPopularLoading={isPopularLoading}
               genres={genres}
               genreError={genreError}
               isGenreLoading={isGenreLoading}
               currentPage={currentPage}
-              totalPages={totalPages}
+              popularTotalPages={popularTotalPages}
               handlePageChange={handlePageChange}
               width={width}
             />
@@ -339,7 +378,7 @@ function App() {
               genreError={genreError}
               isGenreLoading={isGenreLoading}
               currentPage={currentPage}
-              totalPages={totalPages}
+              topRatedTotalPages={topRatedTotalPages}
               handlePageChange={handlePageChange}
               width={width}
             />
@@ -355,7 +394,7 @@ function App() {
               genreError={genreError}
               isGenreLoading={isGenreLoading}
               currentPage={currentPage}
-              totalPages={totalPages}
+              upcomingTotalPages={upcomingTotalPages}
               handlePageChange={handlePageChange}
               width={width}
             />

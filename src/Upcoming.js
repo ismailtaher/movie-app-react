@@ -10,9 +10,11 @@ const Upcoming = ({
   isGenreLoading,
   genreError,
   currentPage,
-  totalPages,
+  upcomingTotalPages,
   handlePageChange,
 }) => {
+  console.log("Current Page:", currentPage);
+  console.log("Total Pages:", upcomingTotalPages);
   return (
     <main className="main-style p-3">
       <h2 className="text-2xl">Upcoming Movies</h2>
@@ -29,10 +31,12 @@ const Upcoming = ({
         (upcomingMovies?.length !== 0 ? (
           <>
             <Feed movies={upcomingMovies} genres={genres} />
-            <Pages
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}></Pages>
+            {upcomingTotalPages > 1 && (
+              <Pages
+                currentPage={currentPage}
+                totalPages={upcomingTotalPages}
+                onPageChange={handlePageChange}></Pages>
+            )}
           </>
         ) : (
           <p className="text-rose-900 text-center">No movies to display</p>
