@@ -47,7 +47,7 @@ const useAxiosFetch = (
               ? response.data
               : isUpcoming
               ? response.data
-              : response.data.results
+              : response.data
           );
           setFetchError(null);
         }
@@ -70,7 +70,18 @@ const useAxiosFetch = (
     };
 
     return cleanUp;
-  }, [dataUrl]);
+  }, [
+    dataUrl,
+    isCredits,
+    isDetails,
+    isGenre,
+    isPopular,
+    isReviews,
+    isSearch,
+    isTopRated,
+    isTrailer,
+    isUpcoming,
+  ]);
 
   return { data, fetchError, isLoading };
 };

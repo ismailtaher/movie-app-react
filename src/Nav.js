@@ -16,7 +16,7 @@ const Nav = ({ genreSearch, handleCheck, toggleMenu, setCurrentPage }) => {
   return (
     <nav
       id="nav-menu"
-      className="z-20 absolute text-black p-3 top-[71px] -left-2 md:top-[47px] md:-left-3 flex-col gap-1 w-auto md:w-[50%] bg-white rounded-br-3xl animate-open-menu hidden">
+      className="z-20 absolute text-black p-3 top-[71px] -left-2 md:top-[47px] md:-left-3 lg:top-[44px] lg:-left-4 flex-col gap-1 w-auto md:w-[50%] bg-white lg:w-full rounded-br-3xl animate-open-menu hidden">
       <h2
         className={`text-2xl w-56 hover:text-emerald-500 cursor-pointer ${
           isGenreDropddownOpen ? "text-emerald-500" : "text-black"

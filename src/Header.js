@@ -65,9 +65,13 @@ const Header = ({
   const closeMenu = () => {
     const hamButton = document.getElementById("hamburger-button");
     const mobileMenu = document.getElementById("nav-menu");
-    mobileMenu.classList.add("hidden");
-    mobileMenu.classList.remove("flex");
-    hamButton.classList.remove("toggle-btn");
+    if (mobileMenu) {
+      mobileMenu.classList.add("hidden");
+      mobileMenu.classList.remove("flex");
+    }
+    if (hamButton) {
+      hamButton.classList.remove("toggle-btn");
+    }
   };
 
   const homeClose = () => {
@@ -174,7 +178,7 @@ const Header = ({
   };
 
   return (
-    <header className="p-2 bg-[#1A936F] -top-1 z-10 flex justify-center gap-1 items-between text-xl font-display flex-col w-[100%] md:p-3">
+    <header className="p-2 bg-[#1A936F] -top-1 z-10 flex justify-center gap-1 items-between text-xl font-display flex-col w-[100%] md:p-3 lg:p-2 lg:px-4">
       <div className="relative flex justify-between gap-1 items-center flex-row w-auto flex-grow md:space-x-3">
         {width <= 1024 && (
           <>
@@ -207,7 +211,7 @@ const Header = ({
             <img
               src={blackLogo}
               alt="Duck Logo"
-              className="flex w-5 h-auto justify-center items-center md:w-7 xl:w-14 md:text-black"
+              className="flex w-5 h-auto justify-center items-center md:w-7 md:text-black lg:w-7"
             />
             <h1 className="md:text-3xl text-black">MDB</h1>
           </div>

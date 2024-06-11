@@ -182,8 +182,11 @@ function App() {
   );
 
   useEffect(() => {
-    setMovies(data);
-    setTotalPages(data.total_pages);
+    if (data && data.results) {
+      setMovies(data.results);
+      console.log(data);
+      setTotalPages(data.total_pages);
+    }
   }, [data, genreSearch]);
 
   /* console.log(

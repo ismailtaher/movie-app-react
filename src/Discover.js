@@ -1,5 +1,6 @@
 import React from "react";
 import Feed from "./Feed";
+import Pages from "./Pages";
 
 const Discover = ({
   movies,
@@ -8,6 +9,10 @@ const Discover = ({
   genres,
   isGenreLoading,
   genreError,
+  currentPage,
+  totalPages,
+  handlePageChange,
+  width,
 }) => {
   return (
     <main className="main-style p-3">
@@ -22,8 +27,15 @@ const Discover = ({
         !isGenreLoading &&
         !genreError &&
         !fetchError &&
-        (movies.length !== 0 ? (
-          <Feed movies={movies} genres={genres} />
+        (movies?.length !== 0 ? (
+          <>
+            <Feed movies={movies} genres={genres} />
+            <Pages
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+              width={width}></Pages>
+          </>
         ) : (
           <p className="text-rose-900 text-center">No movies to display</p>
         ))}

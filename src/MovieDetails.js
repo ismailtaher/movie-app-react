@@ -290,7 +290,7 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
               </div>
             </div>
           ) : (
-            <h2 className="text-center">No Reviews to Show</h2>
+            <h2 className="text-black text-center">No Reviews to Show</h2>
           )}
         </article>
       </section>
