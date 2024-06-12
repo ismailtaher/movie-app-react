@@ -184,7 +184,6 @@ function App() {
   useEffect(() => {
     if (data && data.results) {
       setMovies(data.results);
-      console.log(data);
       setTotalPages(data.total_pages);
     }
   }, [data, genreSearch]);
@@ -274,6 +273,7 @@ function App() {
   );
 
   useEffect(() => {
+    console.log(search);
     if (dataUpcoming && dataUpcoming.results) {
       setUpcomingMovies(dataUpcoming.results);
       setUpcomingTotalPages(dataUpcoming.total_pages || 1);
@@ -297,7 +297,11 @@ function App() {
   );
 
   useEffect(() => {
-    setSearchResults(searchData);
+    console.log(search);
+    console.log(searchData);
+    if (searchData) {
+      setSearchResults(searchData);
+    }
   }, [searchData, search]);
 
   /* console.log(searchResults); */

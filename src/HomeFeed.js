@@ -29,7 +29,7 @@ const HomeFeed = ({ movies, genres, width }) => {
       {width > 640 && (
         <button
           onClick={scrollLeft}
-          className="absolute left-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full z-10">
+          className="absolute left-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full z-8">
           &#8249;
         </button>
       )}
@@ -43,7 +43,7 @@ const HomeFeed = ({ movies, genres, width }) => {
       {width > 640 && (
         <button
           onClick={scrollRight}
-          className="absolute right-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full z-10">
+          className="absolute right-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full z-8">
           &#8250;
         </button>
       )}
