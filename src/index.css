@@ -39,6 +39,17 @@
 
 @layer utilities {
   .toggle-btn {
-    @apply [&>div::before]:translate-y-0 [&>div::after]:translate-y-0;
+    @apply [&>div::before]:translate-y-0 [&>div::before]:rotate-45 [&>div::after]:translate-y-0 [&>div::after]:-rotate-45;
+  }
+
+  .toggle-btn > div {
+    transition: background-color 0.2s;
+  }
+
+  .hide-middle-bar {
+    background-color: #1a936f;
+    @media screen and (min-width: 1280px) {
+      background-color: #f9f6ee;
+    }
   }
 }

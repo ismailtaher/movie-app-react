@@ -19,8 +19,6 @@ const Pages = ({ currentPage, totalPages, onPageChange, width }) => {
     if (end - start < maxVisibleButtons) {
       start = Math.max(0, end - maxVisibleButtons);
     }
-    console.log(`Current Page: ${currentPage}, Total Pages: ${totalPages}`);
-    console.log(`Visible Pages: ${pages.slice(start, end)}`);
 
     return pages.slice(start, end);
   };

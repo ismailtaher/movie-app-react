@@ -17,6 +17,7 @@ const Home = ({
   genreError,
   isGenreLoading,
   width,
+  isMenuOpen,
 }) => {
   /* console.log(movies); */
   return (
@@ -69,7 +70,12 @@ const Home = ({
                   Popular Movies &#8250;
                 </h2>
               </Link>
-              <HomeFeed width={width} movies={popularMovies} genres={genres} />
+              <HomeFeed
+                width={width}
+                isMenuOpen={isMenuOpen}
+                movies={popularMovies}
+                genres={genres}
+              />
             </article>
             <article className="my-6">
               <Link to="/top-rated" className="inline-block pl-2 pb-2">
@@ -77,7 +83,12 @@ const Home = ({
                   Top Rated Movies &#8250;
                 </h2>
               </Link>
-              <HomeFeed width={width} movies={topRatedMovies} genres={genres} />
+              <HomeFeed
+                width={width}
+                isMenuOpen={isMenuOpen}
+                movies={topRatedMovies}
+                genres={genres}
+              />
             </article>
             <article className="my-6">
               <Link to="/upcoming" className="inline-block pl-2 pb-2">
@@ -85,7 +96,12 @@ const Home = ({
                   Upcoming Movies &#8250;
                 </h2>
               </Link>
-              <HomeFeed width={width} movies={upcomingMovies} genres={genres} />
+              <HomeFeed
+                width={width}
+                isMenuOpen={isMenuOpen}
+                movies={upcomingMovies}
+                genres={genres}
+              />
             </article>
           </section>
         ) : (

@@ -116,6 +116,8 @@ function App() {
     },
   ]);
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const hamButton = document.getElementById("hamburger-button");
   const mobileMenu = document.getElementById("nav-menu");
 
@@ -123,26 +125,14 @@ function App() {
     mobileMenu.classList.toggle("hidden");
     mobileMenu.classList.toggle("flex");
     hamButton.classList.toggle("toggle-btn");
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const isPositive = (value) => {
     return value !== "";
   };
 
-  const handleCheck = (id) => {
-    const listGenres = genreSearch.map((genreSingle) =>
-      genreSingle.id === id
-        ? { ...genreSingle, cond: !genreSingle.cond }
-        : genreSingle
-    );
-    setGenreSearch(listGenres);
-    const selectedGenres = listGenres
-      .filter((genre) => genre.cond)
-      .map((genre) => genre.name)
-      .join("+");
-    toggleMenu();
-    navigate(`/discover/${selectedGenres}`);
-  };
+  // Main Declarations
 
   const [search, setSearch] = useState("");
 
@@ -167,18 +157,81 @@ function App() {
   const [popularTotalPages, setPopularTotalPages] = useState(1);
   const [upcomingTotalPages, setUpcomingTotalPages] = useState(1);
 
-  const getSelectedGenres = (genreSearch) => {
+  // Filter Application
+
+  const [tempGenreSearch, setTempGenreSearch] = useState([...genreSearch]);
+  const [tempRatingValue, setTempRatingValue] = useState([0, 10]);
+  const [ratingValue, setRatingValue] = useState([0, 10]);
+  const [hasChanges, setHasChanges] = useState(false);
+
+  // Filter Functions
+
+  const handleChanges = () => {
+    setHasChanges(true);
+  };
+
+  const handleCheck = (id) => {
+    const listGenres = tempGenreSearch.map((genreSingle) =>
+      genreSingle.id === id
+        ? { ...genreSingle, cond: !genreSingle.cond }
+        : genreSingle
+    );
+
+    if (width < 1280) {
+      setGenreSearch(listGenres);
+    }
+
+    setTempGenreSearch(listGenres);
+    /* console.log(listGenres); */
+    handleChanges();
+    const selectedGenres = listGenres
+      .filter((genre) => genre.cond)
+      .map((genre) => genre.name)
+      .join("+");
+
+    if (width < 1280) {
+      toggleMenu();
+      navigate(
+        selectedGenres ? `/discover/${selectedGenres}` : "/discover/all"
+      );
+    }
+  };
+
+  const getSelectedGenres = (genreSearch, key = "id") => {
     return genreSearch
-      .map((genreSingle) => (genreSingle.cond === true ? genreSingle.id : ""))
-      .filter(isPositive);
+      .filter((genreSingle) => genreSingle.cond)
+      .map((genreSingle) => genreSingle[key]);
+  };
+
+  const handleSliderChange = (event, newValue) => {
+    event.preventDefault();
+    setTempRatingValue(newValue);
+    handleChanges();
+    console.log(ratingValue);
+  };
+
+  const handleApplyFilters = () => {
+    setHasChanges(false);
+    setGenreSearch(tempGenreSearch);
+    setRatingValue(tempRatingValue);
+
+    const selectedGenres = getSelectedGenres(tempGenreSearch, "name").join("+");
+    console.log(selectedGenres);
+    navigate(selectedGenres ? `/discover/${selectedGenres}` : "/discover/all");
   };
 
   const { selectedGenres } = useParams();
 
-  const genresString = selectedGenres || getSelectedGenres(genreSearch);
+  const genresString = selectedGenres
+    ? selectedGenres.split("+")
+    : getSelectedGenres(genreSearch, "name").join("+");
 
   const { data, fetchError, isLoading } = useAxiosFetch(
-    `https://api.themoviedb.org/3/discover/movie?language=en-US&api_key=${api_key}&with_genres=${genresString}&page=${currentPage}`
+    `https://api.themoviedb.org/3/discover/movie?language=en-US&api_key=${api_key}&with_genres=${getSelectedGenres(
+      genreSearch
+    ).join(",")}&page=${currentPage}&vote_average.gte=${
+      ratingValue[0]
+    }&vote_average.lte=${ratingValue[1]}`
   );
 
   useEffect(() => {
@@ -186,7 +239,7 @@ function App() {
       setMovies(data.results);
       setTotalPages(data.total_pages);
     }
-  }, [data, genreSearch]);
+  }, [data]);
 
   /* console.log(
     "id",
@@ -207,6 +260,8 @@ function App() {
   useEffect(() => {
     setGenres(dataGenre);
   }, [dataGenre]);
+
+  // Main Functions
 
   const {
     data: dataPopular,
@@ -320,7 +375,8 @@ function App() {
         searchError={searchError}
         isSearchLoading={isSearchLoading}
         setCurrentPage={setCurrentPage}
-        genres={genres}></Header>
+        genres={genres}
+        isMenuOpen={isMenuOpen}></Header>
       <Routes>
         <Route
           exact
@@ -340,6 +396,7 @@ function App() {
               genreError={genreError}
               isGenreLoading={isGenreLoading}
               width={width}
+              isMenuOpen={isMenuOpen}
             />
           }></Route>
         <Route
@@ -356,6 +413,12 @@ function App() {
               totalPages={totalPages}
               handlePageChange={handlePageChange}
               width={width}
+              handleCheck={handleCheck}
+              genreSearch={tempGenreSearch}
+              ratingValue={tempRatingValue}
+              setRatingValue={setRatingValue}
+              handleSliderChange={handleSliderChange}
+              handleChanges={handleChanges}
             />
           }></Route>
         <Route
@@ -414,6 +477,13 @@ function App() {
         <Route path="*" element={<Missing />}></Route>
       </Routes>
       <Footer width={width}></Footer>
+      {hasChanges && width >= 1280 && (
+        <button
+          onClick={handleApplyFilters}
+          className="fixed bottom-0 w-full p-3 bg-[#1A936F] text-black rounded-lg shadow-lg">
+          Apply Filters
+        </button>
+      )}
     </div>
   );
 }

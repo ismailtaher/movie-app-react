@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import HomePosts from "./HomePosts";
 
-const HomeFeed = ({ movies, genres, width }) => {
+const HomeFeed = ({ movies, genres, width, isMenuOpen }) => {
   const scrollContainerRef = useRef(null);
 
   const scrollLeft = () => {
@@ -29,7 +29,9 @@ const HomeFeed = ({ movies, genres, width }) => {
       {width > 640 && (
         <button
           onClick={scrollLeft}
-          className="absolute left-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full z-8">
+          className={`absolute left-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full ${
+            isMenuOpen ? "z-0" : "z-10"
+          }`}>
           &#8249;
         </button>
       )}
@@ -43,7 +45,9 @@ const HomeFeed = ({ movies, genres, width }) => {
       {width > 640 && (
         <button
           onClick={scrollRight}
-          className="absolute right-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full z-8">
+          className={`absolute right-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full ${
+            isMenuOpen ? "z-0" : "z-10"
+          }`}>
           &#8250;
         </button>
       )}
