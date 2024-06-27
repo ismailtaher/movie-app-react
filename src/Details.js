@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import useAxiosFetch from "./hooks/useAxiosFetch";
 import MovieDetails from "./MovieDetails";
 
-const Details = ({ api_key, width }) => {
+const Details = ({ api_key, width, isMenuOpen }) => {
   const { id } = useParams();
 
   const [details, setDetails] = useState({});
@@ -106,7 +106,8 @@ const Details = ({ api_key, width }) => {
             details={details}
             credits={credits}
             trailer={trailer}
-            reviews={reviews}></MovieDetails>
+            reviews={reviews}
+            isMenuOpen={isMenuOpen}></MovieDetails>
         )}
     </main>
   );

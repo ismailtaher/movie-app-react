@@ -219,7 +219,7 @@ const Header = ({
             <h1 className="md:text-3xl text-black">MDB</h1>
           </div>
         </Link>
-        {640 < width && (
+        {768 < width && (
           <>
             <div className="flex flex-grow justify-center items-center">
               <form className="w-[100%]" onSubmit={(e) => e.preventDefault()}>
@@ -271,7 +271,7 @@ const Header = ({
           <FaRegUserCircle className="text-black text-2xl md:text-3xl" />
         </div>
       </div>
-      {width < 640 && (
+      {width < 768 && (
         <div className="flex justify-center items-center">
           <form className="w-[100%]" onSubmit={(e) => e.preventDefault()}>
             <label className="absolute left-[-99999px]" htmlFor="search">

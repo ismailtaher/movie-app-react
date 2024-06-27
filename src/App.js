@@ -8,7 +8,7 @@ import Details from "./Details";
 import About from "./About";
 import Missing from "./Missing";
 import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate, useParams } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import useWindowSize from "./hooks/useWindowSize";
 import useAxiosFetch from "./hooks/useAxiosFetch";
 import Upcoming from "./Upcoming";
@@ -128,9 +128,9 @@ function App() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const isPositive = (value) => {
+  /* const isPositive = (value) => {
     return value !== "";
-  };
+  }; */
 
   // Main Declarations
 
@@ -220,11 +220,11 @@ function App() {
     navigate(selectedGenres ? `/discover/${selectedGenres}` : "/discover/all");
   };
 
-  const { selectedGenres } = useParams();
+  /* const { selectedGenres } = useParams(); */
 
-  const genresString = selectedGenres
+  /* const genresString = selectedGenres
     ? selectedGenres.split("+")
-    : getSelectedGenres(genreSearch, "name").join("+");
+    : getSelectedGenres(genreSearch, "name").join("+"); */
 
   const { data, fetchError, isLoading } = useAxiosFetch(
     `https://api.themoviedb.org/3/discover/movie?language=en-US&api_key=${api_key}&with_genres=${getSelectedGenres(
@@ -328,7 +328,6 @@ function App() {
   );
 
   useEffect(() => {
-    console.log(search);
     if (dataUpcoming && dataUpcoming.results) {
       setUpcomingMovies(dataUpcoming.results);
       setUpcomingTotalPages(dataUpcoming.total_pages || 1);
@@ -472,7 +471,9 @@ function App() {
         <Route
           exact
           path="movie/:id"
-          element={<Details api_key={api_key} width={width} />}></Route>
+          element={
+            <Details api_key={api_key} width={width} isMenuOpen={isMenuOpen} />
+          }></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="*" element={<Missing />}></Route>
       </Routes>

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
 import ISO6391 from "iso-639-1";
 import Iframe from "react-iframe";
 import movieReel from "./images/MovieReel.jpeg";
 
-const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
+const MovieDetails = ({
+  details,
+  credits,
+  width,
+  trailer,
+  reviews,
+  isMenuOpen,
+}) => {
   const imgUrl = "https://image.tmdb.org/t/p/w500";
 
   const backdrop = imgUrl + details.backdrop_path;
@@ -55,6 +62,28 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
 
   /* console.log(width); */
 
+  const scrollContainerRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        top: 0,
+        left: -800,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        top: 0,
+        left: 800,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className={`relative flex flex-col justify-center w-full text-white`}>
       <div
@@ -75,10 +104,10 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
           </div>
         )}
         {768 <= width && (
-          <section className="md:bg-transparent md:backdrop-blur-base md:backdrop-brightness-50 w-auto grid grid-flow-col grid-cols-3 gap-8 py-2 overscroll-contain">
-            <div className={`w-24 m-4 md:w-full`}>
+          <section className="md:bg-transparent md:backdrop-blur-base md:backdrop-brightness-50 w-auto grid grid-flow-col grid-cols-3 gap-8 py-2 overscroll-contain 2xl:px-80 2xl:grid-cols-3">
+            <div className={`w-24 m-4 md:w-full 2xl:flex 2xl:justify-start`}>
               <img
-                className="w-full"
+                className="w-full 2xl:w-80"
                 src={
                   details.poster_path ? imgUrl + details.poster_path : movieReel
                 }
@@ -200,35 +229,57 @@ const MovieDetails = ({ details, credits, width, trailer, reviews }) => {
           </article>
         </section>
       )}
-      <section className="p-4 md:p-6 flex flex-col space-y-4">
+      <section className="p-4 md:p-6 flex flex-col space-y-4 2xl:mx-80">
         <article>
           <h1 className="text-black text-xl md:text-3xl pb-2 md:pb-4">
             Top Cast
           </h1>
-          <div className="flex space-x-3 overflow-x-scroll scroll-cast">
-            {credits.cast?.slice(0, 9).map((member) => {
-              return (
-                <div className="relative bg-[#C6DABF] rounded-md">
-                  <div className="w-24 md:w-32 rounded-md">
-                    {member.profile_path && (
-                      <img
-                        className="object-scale-down rounded-md"
-                        src={imgUrl + member.profile_path}
-                        alt={`${member.name}'s profile`}
-                      />
-                    )}
+          <div className="relative">
+            {width > 640 && (
+              <button
+                onClick={scrollLeft}
+                className={`absolute left-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full ${
+                  isMenuOpen ? "z-0" : "z-10"
+                }`}>
+                &#8249;
+              </button>
+            )}
+            <div
+              className="flex space-x-3 overflow-x-scroll scroll-cast relative"
+              ref={scrollContainerRef}>
+              {credits.cast?.slice(0, width < 1536 ? 9 : 19).map((member) => {
+                return (
+                  <div className="relative bg-[#C6DABF] shadow-sm rounded-md">
+                    <div className="w-24 md:w-32 rounded-md">
+                      {member.profile_path && (
+                        <img
+                          className="object-scale-down rounded-md"
+                          src={imgUrl + member.profile_path}
+                          alt={`${member.name}'s profile`}
+                        />
+                      )}
+                    </div>
+                    <div className="bg-[#C6DABF] p-1 md:p-2 flex flex-col justify-start items-start">
+                      <h2 className="font-semibold text-black text-sm md:text-lg">
+                        {member.name}
+                      </h2>
+                      <h2 className="text-zinc-700 text-sm md:text-base">
+                        {member.character}
+                      </h2>
+                    </div>
                   </div>
-                  <div className="bg-[#C6DABF] p-1 md:p-2 flex flex-col justify-start items-start">
-                    <h2 className="font-semibold text-black text-sm md:text-lg">
-                      {member.name}
-                    </h2>
-                    <h2 className="text-zinc-700 text-sm md:text-base">
-                      {member.character}
-                    </h2>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+            {width > 640 && (
+              <button
+                onClick={scrollRight}
+                className={`absolute right-0 top-1/2 w-12 h-12 transform -translate-y-1/2 bg-[#1A936F] text-white p-2 rounded-full ${
+                  isMenuOpen ? "z-0" : "z-10"
+                }`}>
+                &#8250;
+              </button>
+            )}
           </div>
         </article>
         <article>
