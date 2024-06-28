@@ -434,6 +434,12 @@ function App() {
               popularTotalPages={popularTotalPages}
               handlePageChange={handlePageChange}
               width={width}
+              handleCheck={handleCheck}
+              genreSearch={tempGenreSearch}
+              ratingValue={tempRatingValue}
+              setRatingValue={setRatingValue}
+              handleSliderChange={handleSliderChange}
+              handleChanges={handleChanges}
             />
           }></Route>
         <Route
@@ -450,6 +456,12 @@ function App() {
               topRatedTotalPages={topRatedTotalPages}
               handlePageChange={handlePageChange}
               width={width}
+              handleCheck={handleCheck}
+              genreSearch={tempGenreSearch}
+              ratingValue={tempRatingValue}
+              setRatingValue={setRatingValue}
+              handleSliderChange={handleSliderChange}
+              handleChanges={handleChanges}
             />
           }></Route>
         <Route
@@ -466,6 +478,12 @@ function App() {
               upcomingTotalPages={upcomingTotalPages}
               handlePageChange={handlePageChange}
               width={width}
+              handleCheck={handleCheck}
+              genreSearch={tempGenreSearch}
+              ratingValue={tempRatingValue}
+              setRatingValue={setRatingValue}
+              handleSliderChange={handleSliderChange}
+              handleChanges={handleChanges}
             />
           }></Route>
         <Route
