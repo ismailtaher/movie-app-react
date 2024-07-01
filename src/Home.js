@@ -27,7 +27,6 @@ const Home = ({
       <LazyBackgroundSection
         HomeBg={HomeBg}
         placeholderImage={placeholderImage}></LazyBackgroundSection>
-      {/* <h2 className="p-3 pb-0 text-2xl md:text-3xl text-black">Home</h2> */}
       {isPopularLoading &&
         isTopRatedLoading &&
         isUpcomingLoading &&

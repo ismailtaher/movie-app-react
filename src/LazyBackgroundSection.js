@@ -6,13 +6,20 @@ const LazyBackgroundSection = ({ HomeBg, placeholderImage }) => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    const currentSectionRef = sectionRef.current;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
+        console.log("IntersectionObserver entry:", entry);
         if (entry.isIntersecting) {
+          console.log("Image is intersecting, loading:", HomeBg);
           const img = new Image();
           img.src = HomeBg;
-          img.onload = () => setBgImage(HomeBg);
-          observer.unobserve(sectionRef.current);
+          img.onload = () => {
+            console.log("Image loaded:", HomeBg);
+            setBgImage(HomeBg);
+          };
+          observer.unobserve(currentSectionRef);
         }
       },
       {
@@ -21,11 +28,13 @@ const LazyBackgroundSection = ({ HomeBg, placeholderImage }) => {
       }
     );
 
-    observer.observe(sectionRef.current);
+    if (currentSectionRef) {
+      observer.observe(currentSectionRef);
+    }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentSectionRef) {
+        observer.unobserve(currentSectionRef);
       }
     };
   }, [HomeBg]);
@@ -34,11 +43,12 @@ const LazyBackgroundSection = ({ HomeBg, placeholderImage }) => {
     <section
       ref={sectionRef}
       style={{
-        backgroundImage: bgImage ? `url('${HomeBg}')` : "none",
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        minHeight: "350px", // Ensure the section has height
       }}>
       <article className=" p-5 h-96 w-full flex flex-col justify-center items-start backdrop-blur-sm space-y-2 text-white">
         <h1 className="text-5xl">Welcome.</h1>
