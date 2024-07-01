@@ -39,7 +39,7 @@ const LazyBackgroundSection = () => {
         observer.unobserve(currentSectionRef);
       }
     };
-  }, [HomeBg]);
+  }, []);
 
   return (
     <section
