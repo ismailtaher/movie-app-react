@@ -1,7 +1,5 @@
 import React from "react";
 import HomeFeed from "./HomeFeed";
-import HomeBg from "./images/wallBGwebcompressed.webp";
-import placeholderImage from "./images/wallBGwebcompressedx10.webp";
 import LazyBackgroundSection from "./LazyBackgroundSection";
 import { Link } from "react-router-dom";
 
@@ -24,9 +22,7 @@ const Home = ({
   /* console.log(movies); */
   return (
     <main className="main-style">
-      <LazyBackgroundSection
-        HomeBg={HomeBg}
-        placeholderImage={placeholderImage}></LazyBackgroundSection>
+      <LazyBackgroundSection></LazyBackgroundSection>
       {isPopularLoading &&
         isTopRatedLoading &&
         isUpcomingLoading &&

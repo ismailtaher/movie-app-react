@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import HomeBg from "./images/wallBGwebcompressed.webp";
+import placeholderImage from "./images/wallBGwebcompressedx10.webp";
 import "intersection-observer";
 
-const LazyBackgroundSection = ({ HomeBg, placeholderImage }) => {
+const LazyBackgroundSection = () => {
   const [bgImage, setBgImage] = useState(placeholderImage);
   const sectionRef = useRef(null);
 
