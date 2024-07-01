@@ -1,6 +1,8 @@
 import React from "react";
 import HomeFeed from "./HomeFeed";
-import HomeBg from "./images/wallBG.jpeg";
+import HomeBg from "./images/wallBGwebcompressed.webp";
+import placeholderImage from "./images/wallBGwebcompressedx10.webp";
+import LazyBackgroundSection from "./LazyBackgroundSection";
 import { Link } from "react-router-dom";
 
 const Home = ({
@@ -22,14 +24,9 @@ const Home = ({
   /* console.log(movies); */
   return (
     <main className="main-style">
-      <section
-        style={{
-          backgroundImage: `url('${HomeBg}')`,
-          backgroundSize: "cover",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}>
+      <LazyBackgroundSection
+        HomeBg={HomeBg}
+        placeholderImage={placeholderImage}>
         <article className=" p-5 h-96 w-full flex flex-col justify-center items-start backdrop-blur-sm space-y-2 text-white">
           <h1 className="text-5xl">Welcome.</h1>
           <div>
@@ -39,7 +36,7 @@ const Home = ({
             <h2 className="text-3xl">Explore now.</h2>
           </div>
         </article>
-      </section>
+      </LazyBackgroundSection>
       {/* <h2 className="p-3 pb-0 text-2xl md:text-3xl text-black">Home</h2> */}
       {isPopularLoading &&
         isTopRatedLoading &&

@@ -1,9 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
-import Discover from "./Discover";
-import Popular from "./Popular";
-import TopRated from "./TopRated";
+import MainMovies from "./MainMovies";
 import Details from "./Details";
 import About from "./About";
 import Missing from "./Missing";
@@ -11,7 +9,6 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import useWindowSize from "./hooks/useWindowSize";
 import useAxiosFetch from "./hooks/useAxiosFetch";
-import Upcoming from "./Upcoming";
 
 function App() {
   const api_key = "06f4f010260b5d81753323c62f046f17";
@@ -401,7 +398,8 @@ function App() {
         <Route
           path="/discover/:selectedGenres"
           element={
-            <Discover
+            <MainMovies
+              componentTitle={"Discover Movies"}
               movies={movies}
               fetchError={fetchError}
               isLoading={isLoading}
@@ -423,15 +421,16 @@ function App() {
         <Route
           path="/popular"
           element={
-            <Popular
-              popularMovies={popularMovies}
-              popularError={popularError}
-              isPopularLoading={isPopularLoading}
+            <MainMovies
+              componentTitle={"Popular Movies"}
+              movies={popularMovies}
+              fetchError={popularError}
+              isLoading={isPopularLoading}
               genres={genres}
               genreError={genreError}
               isGenreLoading={isGenreLoading}
               currentPage={currentPage}
-              popularTotalPages={popularTotalPages}
+              totalPages={popularTotalPages}
               handlePageChange={handlePageChange}
               width={width}
               handleCheck={handleCheck}
@@ -445,15 +444,16 @@ function App() {
         <Route
           path="/top-rated"
           element={
-            <TopRated
-              topRatedMovies={topRatedMovies}
-              topRatedError={topRatedError}
-              isTopRatedLoading={isTopRatedLoading}
+            <MainMovies
+              componentTitle={"Top Rated Movies"}
+              movies={topRatedMovies}
+              fetchError={topRatedError}
+              isLoading={isTopRatedLoading}
               genres={genres}
               genreError={genreError}
               isGenreLoading={isGenreLoading}
               currentPage={currentPage}
-              topRatedTotalPages={topRatedTotalPages}
+              totalPages={topRatedTotalPages}
               handlePageChange={handlePageChange}
               width={width}
               handleCheck={handleCheck}
@@ -467,15 +467,16 @@ function App() {
         <Route
           path="/upcoming"
           element={
-            <Upcoming
-              upcomingMovies={upcomingMovies}
-              upcomingError={upcomingError}
-              isUpcomingLoading={isUpcomingLoading}
+            <MainMovies
+              componentTitle={"Upcoming Movies"}
+              movies={upcomingMovies}
+              fetchError={upcomingError}
+              isLoading={isUpcomingLoading}
               genres={genres}
               genreError={genreError}
               isGenreLoading={isGenreLoading}
               currentPage={currentPage}
-              upcomingTotalPages={upcomingTotalPages}
+              totalPages={upcomingTotalPages}
               handlePageChange={handlePageChange}
               width={width}
               handleCheck={handleCheck}

@@ -192,6 +192,7 @@ const Header = ({
             setCurrentPage={setCurrentPage}
             width={width}></Nav>
           <button
+            aria-label="Navigation Button"
             id="hamburger-button"
             onClick={toggleMenu}
             className="relative w-8 h-8">
@@ -212,6 +213,8 @@ const Header = ({
           className="md:bg-[#1A936F] px-2 rounded-lg">
           <div className="flex justify-center items-center">
             <img
+              width={30}
+              height={30}
               src={blackLogo}
               alt="Duck Logo"
               className="flex w-5 h-auto justify-center items-center md:w-7 md:text-black lg:w-7"

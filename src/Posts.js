@@ -17,6 +17,9 @@ const Posts = ({ movie, genres }) => {
         <div className=" border drop-shadow border-[#C6DABF] hover:bg-[#C6DABF] p-2 my-3 rounded">
           <div className="rounded md:w-auto relative">
             <img
+              width={200}
+              height={300}
+              loading="lazy"
               src={movie.poster_path ? imgUrl + movie.poster_path : movieReel}
               alt={`${movie.title} Poster`}
               className="ease-in-out duration-500 rounded w-full"

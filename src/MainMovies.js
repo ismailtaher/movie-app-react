@@ -1,17 +1,18 @@
 import React from "react";
+import PCNav from "./PCNav";
 import Feed from "./Feed";
 import Pages from "./Pages";
-import PCNav from "./PCNav";
 
-const TopRated = ({
-  topRatedMovies,
-  isTopRatedLoading,
-  topRatedError,
+const MainMovies = ({
+  componentTitle,
+  movies,
+  isLoading,
+  fetchError,
   genres,
   isGenreLoading,
   genreError,
   currentPage,
-  topRatedTotalPages,
+  totalPages,
   handlePageChange,
   width,
   handleCheck,
@@ -22,18 +23,19 @@ const TopRated = ({
 }) => {
   return (
     <main className="main-style p-3 2xl:px-44">
-      <h2 className="text-2xl xl:py-3 xl:pb-5 xl:text-3xl">Top Rated Movies</h2>
-      {isTopRatedLoading && isGenreLoading && (
+      <h2 className="text-2xl xl:py-3 xl:pb-5 xl:text-3xl">{componentTitle}</h2>
+
+      {isLoading && isGenreLoading && (
         <p className="text-center">Loading Movies...</p>
       )}
-      {!isTopRatedLoading && !isGenreLoading && topRatedError && (
-        <p className="text-rose-900 text-center">{topRatedError}</p>
+      {!isLoading && !isGenreLoading && fetchError && (
+        <p className="text-rose-900 text-center">{fetchError}</p>
       )}
-      {!isTopRatedLoading &&
+      {!isLoading &&
         !isGenreLoading &&
         !genreError &&
-        !topRatedError &&
-        (topRatedMovies?.length !== 0 ? (
+        !fetchError &&
+        (movies?.length !== 0 ? (
           <div className="xl:grid xl:grid-cols-8 xl:gap-8 2xl:grid-cols-10">
             {width >= 1280 && (
               <div className="col-span-2">
@@ -47,10 +49,10 @@ const TopRated = ({
               </div>
             )}
             <div className="xl:col-start-3 xl:col-span-7 2xl:col-span-8">
-              <Feed movies={topRatedMovies} genres={genres} />
+              <Feed movies={movies} genres={genres} />
               <Pages
                 currentPage={currentPage}
-                totalPages={topRatedTotalPages}
+                totalPages={totalPages}
                 onPageChange={handlePageChange}
                 width={width}></Pages>
             </div>
@@ -62,4 +64,4 @@ const TopRated = ({
   );
 };
 
-export default TopRated;
+export default MainMovies;

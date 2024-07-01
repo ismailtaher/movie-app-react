@@ -17,6 +17,9 @@ const HomePosts = ({ movie }) => {
         <div className="w-48 border drop-shadow shadow-black hover:bg-[#C6DABF] p-2 my-3 rounded">
           <div className="rounded md:w-auto relative">
             <img
+              width={200}
+              height={300}
+              loading="lazy"
               src={imgUrl + movie.poster_path}
               alt={`${movie.title} Poster`}
               className="ease-in-out duration-500 rounded w-full"
