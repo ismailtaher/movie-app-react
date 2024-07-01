@@ -6,15 +6,13 @@ const LazyBackgroundSection = ({ HomeBg, placeholderImage }) => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const currentSectionRef = sectionRef.current;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           const img = new Image();
           img.src = HomeBg;
           img.onload = () => setBgImage(HomeBg);
-          observer.unobserve(currentSectionRef);
+          observer.unobserve(sectionRef.current);
         }
       },
       {
@@ -23,13 +21,11 @@ const LazyBackgroundSection = ({ HomeBg, placeholderImage }) => {
       }
     );
 
-    if (currentSectionRef) {
-      observer.observe(currentSectionRef);
-    }
+    observer.observe(sectionRef.current);
 
     return () => {
-      if (currentSectionRef) {
-        observer.unobserve(currentSectionRef);
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
       }
     };
   }, [HomeBg]);
@@ -38,13 +34,21 @@ const LazyBackgroundSection = ({ HomeBg, placeholderImage }) => {
     <section
       ref={sectionRef}
       style={{
-        backgroundImage: bgImage ? `url('${bgImage}')` : "none",
+        backgroundImage: bgImage ? `url('${HomeBg}')` : "none",
         backgroundSize: "cover",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}>
-      {/* Add content here if needed */}
+      <article className=" p-5 h-96 w-full flex flex-col justify-center items-start backdrop-blur-sm space-y-2 text-white">
+        <h1 className="text-5xl">Welcome.</h1>
+        <div>
+          <h2 className="text-3xl">
+            Millions of movies and people to discover.
+          </h2>
+          <h2 className="text-3xl">Explore now.</h2>
+        </div>
+      </article>
     </section>
   );
 };

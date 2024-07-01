@@ -26,17 +26,7 @@ const Home = ({
     <main className="main-style">
       <LazyBackgroundSection
         HomeBg={HomeBg}
-        placeholderImage={placeholderImage}>
-        <article className=" p-5 h-96 w-full flex flex-col justify-center items-start backdrop-blur-sm space-y-2 text-white">
-          <h1 className="text-5xl">Welcome.</h1>
-          <div>
-            <h2 className="text-3xl">
-              Millions of movies and people to discover.
-            </h2>
-            <h2 className="text-3xl">Explore now.</h2>
-          </div>
-        </article>
-      </LazyBackgroundSection>
+        placeholderImage={placeholderImage}></LazyBackgroundSection>
       {/* <h2 className="p-3 pb-0 text-2xl md:text-3xl text-black">Home</h2> */}
       {isPopularLoading &&
         isTopRatedLoading &&
