@@ -1,6 +1,6 @@
 # Live Demo
 
-https://main--dapper-gingersnap-85db01.netlify.app/movie/786892
+[Live Demo](https://main--dapper-gingersnap-85db01.netlify.app/movie/786892)
 
 # Overview
 The Movie App is a web application that provides detailed information about movies using The Movie Database (TMDb) API. Users can search for movies, view comprehensive details, discover new films, and get movie suggestions based on selected genres through a user-friendly interface.
