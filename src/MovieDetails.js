@@ -316,7 +316,7 @@ const MovieDetails = ({
                   <div className="rounded-full">
                     <img
                       className="cropped-image rounded-full"
-                      width={width / 4}
+                      width={width > 1280 ? width / 4 : width / 8}
                       src={imgUrl + reviews[0]?.author_details.avatar_path}
                       alt={`${reviews[0]?.author}'s Profile`}
                     />
@@ -327,9 +327,11 @@ const MovieDetails = ({
                     A review by {reviews[0]?.author}
                   </h2>
                   <div className="flex space-x-2 md:text-2xl">
-                    <h3 className="bg-emerald-500 text-black rounded-md font-semibold">
-                      &nbsp;{reviews[0]?.author_details.rating}.0&nbsp;
-                    </h3>
+                    {reviews[0]?.author_details.rating && (
+                      <h3 className="bg-emerald-500 text-black rounded-md font-semibold">
+                        &nbsp;{reviews[0]?.author_details.rating}.0&nbsp;
+                      </h3>
+                    )}
                     <p className="text-zinc-700 text-sm md:text-xl">
                       Posted on {String(reviews[0]?.created_at).slice(0, 10)}
                     </p>

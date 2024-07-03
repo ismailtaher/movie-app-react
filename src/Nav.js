@@ -20,7 +20,7 @@ const Nav = ({ genreSearch, handleCheck, toggleMenu, setCurrentPage }) => {
       <Link
         to="/"
         onClick={toggleMenuResetPage}
-        className="text-2xl hover:text-[#1A936F] active:text-[#1A936F] hover:lg:text-3xl ease-in-out sm:hidden md:hidden lg:hidden xl:block">
+        className="text-2xl hover:text-[#1A936F] active:text-[#1A936F] hover:lg:text-3xl ease-in-out hidden xl:block">
         Home
       </Link>
       <h2
