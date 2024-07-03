@@ -1,20 +1,23 @@
 # Live Demo
 
-[Live Demo](https://main--dapper-gingersnap-85db01.netlify.app/movie/786892)
+[Live Demo](https://main--dapper-gingersnap-85db01.netlify.app/)
 
 # Overview
+
 The Movie App is a web application that provides detailed information about movies using The Movie Database (TMDb) API. Users can search for movies, view comprehensive details, discover new films, and get movie suggestions based on selected genres through a user-friendly interface.
 
 ## Features
-* Search Movies: Find movies by title.
-* Movie Details: View movie title, release date, runtime, genres, language, tagline, overview, ratings, and votes.
-* Cast and Crew: Get information on main cast members and key crew members like directors, writers, and producers.
-* Genre-Based Suggestions: Receive movie suggestions based on selected genres.
+
+- Search Movies: Find movies by title.
+- Movie Details: View movie title, release date, runtime, genres, language, tagline, overview, ratings, and votes.
+- Cast and Crew: Get information on main cast members and key crew members like directors, writers, and producers.
+- Genre-Based Suggestions: Receive movie suggestions based on selected genres.
 
 ## Technical Details
-* Frontend: Built with React and styled with Tailwind CSS.
-* Backend: Uses TMDb API for real-time data.
-* Custom Hook: useAxiosFetch for handling API requests.
+
+- Frontend: Built with React and styled with Tailwind CSS.
+- Backend: Uses TMDb API for real-time data.
+- Custom Hook: useAxiosFetch for handling API requests.
 
 ### Home Screen
 
@@ -46,7 +49,6 @@ The Movie App is a web application that provides detailed information about movi
 
 ![Screenshot 2024-07-03 at 5 22 49 PM](https://github.com/ismailtaher/movie-app-react/assets/57496063/4c240e3e-4575-421b-b2af-a5d8b85c5e51)
 
-
 ### Top-Rated Movies
 
 ![Screenshot 2024-07-03 at 5 23 21 PM](https://github.com/ismailtaher/movie-app-react/assets/57496063/ee8f8f0a-9759-4540-808a-1bce48b6061d)
@@ -62,8 +64,3 @@ The Movie App is a web application that provides detailed information about movi
 ### Details for a Movie (2)
 
 ![Screenshot 2024-07-03 at 5 28 49 PM](https://github.com/ismailtaher/movie-app-react/assets/57496063/34cfdd6a-078f-4268-b687-69d3623e2e89)
-
-
-
-
-
