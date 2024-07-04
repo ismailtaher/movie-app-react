@@ -309,14 +309,20 @@ const MovieDetails = ({
               <div
                 className={
                   reviews[0]?.author_details.avatar_path
-                    ? `flex justify-start items-center pt-2 md:p-4`
-                    : `flex justify-center items-center pt-2 md:p-4`
+                    ? `flex justify-start items-center pt-2 md:p-4 2xl:p-1`
+                    : `flex justify-center items-center pt-2 md:p-4 2xl:p-1`
                 }>
                 {reviews[0].author_details.avatar_path && (
                   <div className="rounded-full">
                     <img
                       className="cropped-image rounded-full"
-                      width={width > 1280 ? width / 4 : width / 8}
+                      width={
+                        width < 1280
+                          ? width / 4
+                          : width > 1560
+                          ? width / 16
+                          : width / 8
+                      }
                       src={imgUrl + reviews[0]?.author_details.avatar_path}
                       alt={`${reviews[0]?.author}'s Profile`}
                     />
